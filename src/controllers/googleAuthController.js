@@ -14,11 +14,9 @@ const googleSignin = async (req, res) => {
       });
     }
 
-    // Verify Google ID token with Firebase
     const decodedToken = await auth.verifyIdToken(idToken);
     const { email, name, picture, uid } = decodedToken;
 
-    // Check if user already exists
     let user = await User.findOne({ 
       $or: [
         { email: email.toLowerCase() },
